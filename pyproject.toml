@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nequip_flux_calculator"
+authors = [
+    { name = "Sandro Wieser", email = "sandro.wieser@tuwien.ac.at" },
+]
+description = "Tool to compute the heat flux for Allegro and NequIP models"
+license = { text = "Apache License 2.0" }
+requires-python = ">=3.8"
+dependencies = [
+    "ase",
+    "numpy",
+    "torch",
+    "mace_unfolded",
+]
+readme = "README.md"
+dynamic = ["version"]
+
+[tool.setuptools.packages.find]
+where = ["./src"]
+
+[tool.setuptools.dynamic]
+version = {attr = "nequip_flux_calculator.__version__"}
+
+[project.scripts]
+allegro_perform_green_kubo = "nequip_flux_calculator.cli.perform_allegro_green_kubo:main"
