@@ -6,7 +6,7 @@ It works specifically for `mir-allegro==0.2.0` and `nequip==0.5.6`. It also need
 
 ## Installation
 
-```
+```bash
 pip install .
 ```
 
@@ -14,9 +14,18 @@ pip install .
 
 Command line tool:
 
-```
+```bash
 allegro_perform_green_kubo --temperature 300 --n_equil 20000 --n_run 1000000 $MODEL_TRAIN_DIRECTORY --struct POSCAR --seed 123
 ```
 
-Equilibration is done with a Langevin thermostat. Since the calculator has to modify the internal structure of the actual model by replacing the `GradientOutput` module, the directory containing `best_model.pth` and `config.yaml` obtained from and used for training must be specified. The code is not very efficient when it comes to GPU utilization due to a single-thread CPU side bottleneck. It is recommended to launch several parallel simulations on the same GPU.
+Equilibration is done with a Langevin thermostat. Since the calculator has to modify the internal structure of the actual model by replacing the `GradientOutput` module, the directory containing `best_model.pth` and `config.yaml` obtained from and used for training must be specified.
+
+The code is not very efficient when it comes to GPU utilization due to a single-thread CPU side bottleneck. It is recommended to launch several parallel simulations on the same GPU. This could look like this:
+```bash
+for i in {1..5}
+do
+   allegro_perform_green_kubo --temperature 300 --n_equil 100 --n_run 100 $MODEL_TRAIN_DIRECTORY --struct POSCAR --flux_dir flux_files_$i --seed $i > GK_$i.out &
+done
+wait
+```
 
