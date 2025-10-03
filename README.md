@@ -24,7 +24,7 @@ The code is not very efficient when it comes to GPU utilization due to a single-
 ```bash
 for i in {1..5}
 do
-   allegro_perform_green_kubo --temperature 300 --n_equil 100 --n_run 100 $MODEL_TRAIN_DIRECTORY --struct POSCAR --flux_dir flux_files_$i --seed $i > GK_$i.out &
+   allegro_perform_green_kubo --temperature 300 --n_equil 20000 --n_run 200000 $MODEL_TRAIN_DIRECTORY --struct POSCAR --flux_dir flux_files_$i --seed $i > GK_$i.out &
 done
 wait
 ```
