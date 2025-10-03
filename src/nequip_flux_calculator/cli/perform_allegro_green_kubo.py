@@ -32,6 +32,13 @@ import time
 from nequip_flux_calculator.custom_modules import load_nequip_calculator
 from nequip.data import AtomicDataDict
 
+eV2J = 1.60218e-19
+J2eV = 1.0 / eV2J
+amu2kg = 1.66054e-27
+A2m = 1.0e-10
+ps2s = 1.0e-12
+kine2J = amu2kg * A2m**2 / ps2s**2
+kine_conversion2eV = kine2J * J2eV
 
 def compute_heat_flux(
     atoms,
@@ -53,13 +60,6 @@ def compute_heat_flux(
         flux / atoms.get_volume() * calc.energy_units_to_eV / calc.length_units_to_A**2
     )
 
-    eV2J = 1.60218e-19
-    J2eV = 1.0 / eV2J
-    amu2kg = 1.66054e-27
-    A2m = 1.0e-10
-    ps2s = 1.0e-12
-    kine2J = amu2kg * A2m**2 / ps2s**2
-    kine_conversion2eV = kine2J * J2eV
 
     kinetic_energies = (
         np.einsum(
