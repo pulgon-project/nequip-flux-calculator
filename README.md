@@ -1,8 +1,8 @@
 # nequip-flux-calculator
-Provides scripts to compute the heat flux for nequip or allegro models.
+Provides scripts to compute the heat flux for NequIP (only for 1 message passing layers) or allegro models.
 
 It was developed for older versions of NequIP/Allegro and will break for newer versions.
-It works specifically for `mir-allegro==0.2.0` and `nequip==0.5.6`. It also needs the `mace-unfolded` package for some functions of the MD part. MACE does not need to be installed for this.
+It works specifically for `mir-allegro==0.2.0` and `nequip==0.5.6`. It also needs the `mace-unfolded` package for some functions of the MD part. MACE does not need to be installed for this. It should be possible to combine this with the unfolding procedure used in `mace-unfolded` to allow the computation with NequIP for `M>1` with a reasonable amount of effort with the implementation of a new custom module.
 
 ## Installation
 
